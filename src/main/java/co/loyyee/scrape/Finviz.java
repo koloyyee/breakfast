@@ -1,5 +1,7 @@
 package co.loyyee.scrape;
 
+import co.loyyee.scrape.model.Outlet;
+import co.loyyee.scrape.model.TickerNews;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Finviz {
     private ArrayList<TickerNews> tickerNewsList;
@@ -26,9 +29,9 @@ public class Finviz {
      * @return a format to LocalDateTime as issuedDate
      * */
     private LocalDateTime formatDateTime(String date, String time ) {
-        LocalDate lDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM-dd-yy"));
-        LocalTime lTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("hh:mma"));
-        return lDate.atTime(lTime);
+            LocalDate lDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM-dd-yy", Locale.ENGLISH));
+            LocalTime lTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("hh:mma",  Locale.ENGLISH));
+            return lDate.atTime(lTime);
     }
     public void scrape(String ticker) {
         StringBuilder sb = new StringBuilder();
@@ -73,7 +76,7 @@ public class Finviz {
                         issuedDateTime = formatDateTime(date, datetime[0]);
                     }
                 }
-                TickerNews tickerNews = new TickerNews(ticker, title, href, issuedDateTime);
+                TickerNews tickerNews = new TickerNews(ticker, title, href, Outlet.FINVIZ, "none", issuedDateTime);
                 tickerNewsList.add(tickerNews);
             }
         } catch (IOException e) {
@@ -89,5 +92,7 @@ public class Finviz {
     public static void main(String[] args) {
         Finviz a = new Finviz();
         a.scrape("AAPL");
+                a.getTickerNews();
     }
+
 }

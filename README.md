@@ -1,2 +1,8 @@
-# Scraping the Mind of Sage of Nebraska.
+# A Daily Serve of Business News as Your Breakfast.
+
+## Goal
+- Public company related news
+- General business news
+
+
 
