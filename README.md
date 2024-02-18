@@ -1,8 +1,6 @@
 # A Daily Serve of Business News as Your Breakfast.
 
-## Goal
-- Public company related news
-- General business news
+A practice of how to scrape using Jsoup, once ready it will be move to Genten
 
 
 
